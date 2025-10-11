@@ -1,0 +1,5 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1024" height="1024" rx="200" fill="#007AFF"/>
+<path d="M512 200C400.5 200 312 288.5 312 400V624C312 735.5 400.5 824 512 824C623.5 824 712 735.5 712 624V400C712 288.5 623.5 200 512 200ZM512 280C556.2 280 592 315.8 592 360C592 404.2 556.2 440 512 440C467.8 440 432 404.2 432 360C432 315.8 467.8 280 512 280ZM512 520C445.7 520 392 566.3 392 632.6V664H632V632.6C632 566.3 578.3 520 512 520Z" fill="white"/>
+<text x="512" y="900" text-anchor="middle" font-family="Arial, sans-serif" font-size="120" font-weight="bold" fill="white">CW</text>
+</svg>
