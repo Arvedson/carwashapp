@@ -3,6 +3,8 @@ export * from "./Button";
 export * from "./Text";
 export * from "./TextInput";
 export * from "./ThemeToggle";
+export * from "./LocationHeaderText";
+export * from "./CurrentLocationButton";
 export * from "./Icon";
 export * from "./Spacer";
 export * from "./Divider";

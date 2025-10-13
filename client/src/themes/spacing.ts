@@ -82,4 +82,20 @@ export const spacingPresets = {
     padding: spacing.md,
     margin: spacing.xs,
   },
+
+  // Map spacing presets
+  map: {
+    height: {
+      small: 200,
+      medium: 300,
+      large: 400,
+    },
+    padding: {
+      container: spacing.md,
+      section: spacing.lg,
+    },
+    margin: {
+      section: spacing.md,
+    },
+  },
 } as const;

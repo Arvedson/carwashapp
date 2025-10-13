@@ -79,4 +79,20 @@ export const borderPresets = {
     radius: borders.radius.none,
     width: borders.width.thin,
   },
+
+  // Map specific borders
+  map: {
+    container: {
+      radius: borders.radius.lg,
+      width: borders.width.none,
+    },
+    section: {
+      radius: borders.radius.lg,
+      width: borders.width.none,
+    },
+    button: {
+      radius: borders.radius.md,
+      width: borders.width.none,
+    },
+  },
 } as const;

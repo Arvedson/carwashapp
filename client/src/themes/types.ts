@@ -42,6 +42,14 @@ export interface ThemeColors {
   pressed: string;
   focus: string;
   disabled: string;
+
+  // Map specific colors
+  mapBackground: string;
+  mapBorder: string;
+  mapMarker: string;
+  mapLocationPin: string;
+  mapRoute: string;
+  mapOverlay: string;
 }
 
 export interface ThemeTypography {
@@ -126,6 +134,14 @@ export interface ComponentSize {
   strokeWidth?: number;
 }
 
+export interface MapComponentSize extends ComponentSize {
+  borderRadius: number;
+}
+
+export interface LocationButtonComponentSize extends ComponentSize {
+  iconSize: number;
+}
+
 export interface ThemeComponents {
   switch: {
     sizes: {
@@ -196,6 +212,20 @@ export interface ThemeComponents {
       small: ComponentSize;
       medium: ComponentSize;
       large: ComponentSize;
+    };
+  };
+  map: {
+    sizes: {
+      small: MapComponentSize;
+      medium: MapComponentSize;
+      large: MapComponentSize;
+    };
+  };
+  locationButton: {
+    sizes: {
+      small: LocationButtonComponentSize;
+      medium: LocationButtonComponentSize;
+      large: LocationButtonComponentSize;
     };
   };
 }

@@ -1,4 +1,8 @@
-import { ThemeComponents } from "./types";
+import {
+  ThemeComponents,
+  MapComponentSize,
+  LocationButtonComponentSize,
+} from "./types";
 
 export const componentTokens: ThemeComponents = {
   // Switch component tokens
@@ -159,7 +163,40 @@ export const componentTokens: ThemeComponents = {
       },
     },
   },
+
+  // Map component tokens
+  map: {
+    sizes: {
+      small: {
+        height: 200,
+        borderRadius: 8,
+      } as MapComponentSize,
+      medium: {
+        height: 300,
+        borderRadius: 12,
+      } as MapComponentSize,
+      large: {
+        height: 400,
+        borderRadius: 12,
+      } as MapComponentSize,
+    },
+  },
+
+  // Location button component tokens
+  locationButton: {
+    sizes: {
+      small: {
+        minHeight: 32,
+        iconSize: 16,
+      } as LocationButtonComponentSize,
+      medium: {
+        minHeight: 44,
+        iconSize: 20,
+      } as LocationButtonComponentSize,
+      large: {
+        minHeight: 56,
+        iconSize: 24,
+      } as LocationButtonComponentSize,
+    },
+  },
 };
-
-
-

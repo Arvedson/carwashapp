@@ -6,42 +6,23 @@ export const createThemeToggleStyles = (
   theme: Theme,
   size: ThemeToggleSize
 ) => {
-  const { colors, spacing, borders, typography } = theme;
+  const padding = size === "small" ? 8 : size === "medium" ? 12 : 16;
+  const iconSize = size === "small" ? 16 : size === "medium" ? 20 : 24;
 
   return StyleSheet.create({
     container: {
       alignItems: "center",
       justifyContent: "center",
-      borderRadius: borders.radius.md,
-      backgroundColor: colors.surface,
-      // Tamaños
-      ...(size === "small" && {
-        padding: spacing.sm,
-        minHeight: theme.components.themeToggle.sizes.small.minHeight,
-        minWidth: theme.components.themeToggle.sizes.small.minHeight,
-      }),
-      ...(size === "medium" && {
-        padding: spacing.md,
-        minHeight: theme.components.themeToggle.sizes.medium.minHeight,
-        minWidth: theme.components.themeToggle.sizes.medium.minHeight,
-      }),
-      ...(size === "large" && {
-        padding: spacing.lg,
-        minHeight: theme.components.themeToggle.sizes.large.minHeight,
-        minWidth: theme.components.themeToggle.sizes.large.minHeight,
-      }),
+      borderRadius: 8,
+      backgroundColor: theme.colors.surface,
+      padding: padding,
+      minHeight: 40,
+      minWidth: 40,
+      borderWidth: 1,
+      borderColor: theme.colors.border,
     },
     icon: {
-      // Tamaños de icono usando tokens
-      ...(size === "small" && {
-        fontSize: typography.fontSize.md,
-      }),
-      ...(size === "medium" && {
-        fontSize: typography.fontSize.lg,
-      }),
-      ...(size === "large" && {
-        fontSize: typography.fontSize.xl,
-      }),
+      fontSize: iconSize,
     },
   });
 };
