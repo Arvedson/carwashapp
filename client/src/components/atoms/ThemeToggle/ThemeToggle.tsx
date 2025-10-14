@@ -1,8 +1,9 @@
 import React from "react";
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
 import { createThemeToggleStyles } from "./ThemeToggle.styles";
 import { ThemeToggleProps } from "./ThemeToggle.types";
+import { Text } from "../Text";
 
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   size = "medium",
@@ -27,7 +28,9 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
       onPress={handleToggle}
       {...props}
     >
-      <Text style={styles.icon}>{getIcon()}</Text>
+      <Text variant="body" size="lg" style={styles.icon}>
+        {getIcon()}
+      </Text>
     </TouchableOpacity>
   );
 };

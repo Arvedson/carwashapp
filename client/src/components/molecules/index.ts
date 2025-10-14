@@ -2,3 +2,4 @@
 export * from "./ButtonStories";
 export * from "./Card";
 export * from "./LocationMap";
+export * from "./ServiceTime";

@@ -2,7 +2,7 @@ import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import DevScreen from "@/components/DevScreen";
+import HomeScreen from "@/components/pages/Home/HomeScreen";
 // import AppNavigator from "@/navigation/AppNavigator";
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
     <ThemeProvider>
       <SafeAreaProvider>
         <StatusBar style="auto" />
-        <DevScreen />
+        <HomeScreen />
         {/* <AppNavigator /> */}
       </SafeAreaProvider>
     </ThemeProvider>

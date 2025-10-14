@@ -24,7 +24,7 @@ export const CurrentLocationButton: React.FC<CurrentLocationButtonProps> = ({
 
   const handlePress = async () => {
     if (onPress) {
-      onPress();
+      onPress({} as any);
       return;
     }
 

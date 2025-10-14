@@ -1,40 +1,40 @@
 import { StyleSheet } from "react-native";
 import { Theme } from "../types";
-import { textStyles } from "../typography";
-import { spacing } from "../spacing";
-import { borders } from "../borders";
+import { borderPresets } from "../borders";
 
 export const createHomeStyles = (theme: Theme) => {
+  const { colors, spacing, typography, borders } = theme;
+
   return StyleSheet.create({
     safeArea: {
       flex: 1,
-      backgroundColor: theme.colors.background,
+      backgroundColor: colors.background,
     },
     container: {
       flex: 1,
-      backgroundColor: theme.colors.background,
+      backgroundColor: colors.background,
     },
     scrollContent: {
       flexGrow: 1,
-      padding: 20,
+      padding: spacing.lg,
     },
     header: {
       alignItems: "center",
-      marginBottom: 32,
+      marginBottom: spacing.xxl,
     },
     themeToggleContainer: {
-      marginTop: 16,
+      marginTop: spacing.md,
     },
     title: {
-      fontSize: 32,
-      fontWeight: "700",
-      color: theme.colors.text.primary,
+      fontSize: typography.fontSize.xxxl,
+      fontWeight: typography.fontWeight.bold,
+      color: colors.text.primary,
       textAlign: "center",
-      marginBottom: 8,
+      marginBottom: spacing.sm,
     },
     subtitle: {
-      fontSize: 18,
-      color: theme.colors.text.secondary,
+      fontSize: typography.fontSize.lg,
+      color: colors.text.secondary,
       textAlign: "center",
     },
     content: {
@@ -43,107 +43,108 @@ export const createHomeStyles = (theme: Theme) => {
     },
     welcomeSection: {
       alignItems: "center",
-      marginBottom: 32,
+      marginBottom: spacing.xxl,
     },
     welcomeText: {
-      fontSize: 24,
-      fontWeight: "700",
-      color: theme.colors.text.primary,
+      fontSize: typography.fontSize.xxl,
+      fontWeight: typography.fontWeight.bold,
+      color: colors.text.primary,
       textAlign: "center",
-      marginBottom: 8,
+      marginBottom: spacing.sm,
     },
     emailText: {
-      fontSize: 16,
-      color: theme.colors.text.secondary,
+      fontSize: typography.fontSize.md,
+      color: colors.text.secondary,
       textAlign: "center",
     },
-    features: {
-      backgroundColor: theme.colors.surface,
-      padding: 20,
-      borderRadius: 12,
-      marginBottom: 20,
-      borderWidth: 1,
-      borderColor: theme.colors.border,
+    // Features Card - ahora usa Card component
+    featuresCard: {
+      marginTop: spacing.lg,
+      marginBottom: spacing.lg,
     },
     featuresTitle: {
-      fontSize: 18,
-      fontWeight: "700",
-      color: theme.colors.text.primary,
-      marginBottom: 16,
+      fontSize: typography.fontSize.lg,
+      fontWeight: typography.fontWeight.bold,
+      color: colors.text.primary,
+      marginBottom: spacing.md,
     },
     featureItem: {
-      fontSize: 16,
-      color: theme.colors.text.primary,
-      marginBottom: 8,
+      fontSize: typography.fontSize.md,
+      color: colors.text.primary,
+      marginBottom: spacing.sm,
+    },
+    featureItemPrimary: {
+      fontSize: typography.fontSize.md,
+      color: colors.text.primary,
+      marginBottom: spacing.sm,
+      fontWeight: typography.fontWeight.semibold,
+    },
+    featureItemSecondary: {
+      fontSize: typography.fontSize.md,
+      color: colors.text.secondary,
+      marginBottom: spacing.sm,
+    },
+    featureItemAccent: {
+      fontSize: typography.fontSize.md,
+      color: colors.info,
+      marginBottom: spacing.sm,
+      fontWeight: typography.fontWeight.medium,
+    },
+    // Text hierarchy styles for main content
+    textPrimary: {
+      fontSize: typography.fontSize.lg,
+      color: colors.text.primary,
+      fontWeight: typography.fontWeight.bold,
+      marginBottom: spacing.sm,
+    },
+    textSecondary: {
+      fontSize: typography.fontSize.md,
+      color: colors.text.secondary,
+      fontWeight: typography.fontWeight.regular,
+      marginBottom: spacing.xs,
+    },
+    textAccent: {
+      fontSize: typography.fontSize.md,
+      color: colors.info,
+      fontWeight: typography.fontWeight.medium,
+      marginBottom: spacing.xs,
+    },
+    textMuted: {
+      fontSize: typography.fontSize.sm,
+      color: colors.text.secondary,
+      fontWeight: typography.fontWeight.regular,
+      opacity: 0.7,
+      marginTop: spacing.xs,
     },
     logoutButton: {
-      backgroundColor: theme.colors.primary,
-      borderRadius: 8,
-      padding: 16,
-      alignItems: "center",
-      marginTop: 20,
+      marginTop: spacing.lg,
     },
-    logoutButtonText: {
-      fontSize: 16,
-      fontWeight: "700",
-      color: theme.colors.text.inverse,
+    // DatePicker Section Styles
+    datePickerCard: {
+      marginTop: spacing.lg,
+      marginBottom: spacing.xxl,
+    },
+    sectionTitle: {
+      fontSize: typography.fontSize.xl,
+      fontWeight: typography.fontWeight.bold,
+      color: colors.text.primary,
+      marginBottom: spacing.lg,
+      textAlign: "center",
+    },
+    datePickerRow: {
+      marginBottom: spacing.md,
+      marginTop: spacing.sm,
+    },
+    datePickerColumn: {
+      flex: 1,
+    },
+    // Estilo específico para el título del DatePicker
+    datePickerTitle: {
+      fontSize: typography.fontSize.md,
+      color: colors.info,
+      fontWeight: typography.fontWeight.medium,
+      marginBottom: spacing.md,
+      textAlign: "center",
     },
   });
 };
-
-// Estilos por defecto para compatibilidad
-export const homeStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "700",
-    textAlign: "center",
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 18,
-    textAlign: "center",
-    marginBottom: 32,
-  },
-  content: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  welcomeText: {
-    fontSize: 24,
-    fontWeight: "700",
-    textAlign: "center",
-    marginBottom: 8,
-  },
-  emailText: {
-    fontSize: 16,
-    textAlign: "center",
-    marginBottom: 32,
-  },
-  features: {
-    padding: 20,
-    borderRadius: 12,
-    marginBottom: 20,
-  },
-  featuresTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    marginBottom: 16,
-  },
-  featureItem: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  logoutButton: {
-    borderRadius: 8,
-    padding: 16,
-    alignItems: "center",
-  },
-  logoutButtonText: {
-    fontSize: 16,
-    fontWeight: "700",
-  },
-});

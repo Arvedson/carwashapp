@@ -1,24 +1,21 @@
 import { StyleSheet } from "react-native";
-import { Theme } from "@/themes/types";
+import { Theme } from "@/themes";
 
 export const createLocationSectionContainerStyles = (theme: Theme) => {
+  const { spacing } = theme;
+
   return StyleSheet.create({
     container: {
-      backgroundColor: theme.colors.surface,
-      borderRadius: 12,
-      padding: 20,
-      marginVertical: 16,
-      borderWidth: 1,
-      borderColor: theme.colors.border,
+      marginVertical: spacing.md,
     },
     header: {
-      marginBottom: 16,
+      marginBottom: spacing.md,
     },
     mapContainer: {
-      marginBottom: 16,
+      marginBottom: spacing.md,
     },
     buttonContainer: {
-      alignItems: "flex-start",
+      alignItems: "center",
     },
   });
 };

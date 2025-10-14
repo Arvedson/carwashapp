@@ -6,10 +6,15 @@ import { LocationSectionContainerProps } from "./LocationSectionContainer.types"
 import { LocationHeaderText } from "@/components/atoms/LocationHeaderText";
 import { CurrentLocationButton } from "@/components/atoms/CurrentLocationButton";
 import { LocationMap } from "@/components/molecules/LocationMap";
+import { Card } from "@/components/molecules/Card";
 
-export const LocationSectionContainer: React.FC<LocationSectionContainerProps> = ({
+export const LocationSectionContainer: React.FC<
+  LocationSectionContainerProps
+> = ({
   mapSize = "medium",
   buttonSize = "medium",
+  cardVariant = "default",
+  cardSize = "medium",
   headerText = "Ubicación",
   buttonText = "Mi Ubicación",
   showLocationButton = true,
@@ -35,18 +40,20 @@ export const LocationSectionContainer: React.FC<LocationSectionContainerProps> =
   };
 
   return (
-    <View style={[styles.container, style]} {...props}>
+    <Card
+      variant={cardVariant}
+      size={cardSize}
+      style={[styles.container, style]}
+      {...props}
+    >
       <View style={styles.header}>
         <LocationHeaderText>{headerText}</LocationHeaderText>
       </View>
-      
+
       <View style={styles.mapContainer}>
-        <LocationMap
-          size={mapSize}
-          onRegionChange={handleMapRegionChange}
-        />
+        <LocationMap size={mapSize} onRegionChange={handleMapRegionChange} />
       </View>
-      
+
       {showLocationButton && (
         <View style={styles.buttonContainer}>
           <CurrentLocationButton
@@ -56,6 +63,6 @@ export const LocationSectionContainer: React.FC<LocationSectionContainerProps> =
           />
         </View>
       )}
-    </View>
+    </Card>
   );
 };

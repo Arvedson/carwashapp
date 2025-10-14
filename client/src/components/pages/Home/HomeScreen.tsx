@@ -1,22 +1,43 @@
-import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  SafeAreaView,
-  Platform,
-} from "react-native";
+import React, { useState } from "react";
+import { View, ScrollView, Platform } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuthStore } from "@/store/useAuthStore";
 import { createHomeStyles } from "@/themes/screens/HomeScreen.styles";
 import { useTheme } from "@/contexts/ThemeContext";
 import { LocationSectionContainer } from "@/components/organisms/LocationSectionContainer";
 import { ThemeToggle } from "@/components/atoms/ThemeToggle";
+import { DatePicker } from "@/components/organisms/DatePicker";
+import { ServiceTime } from "@/components/molecules/ServiceTime";
+import { Card } from "@/components/molecules/Card";
+import { Text } from "@/components/atoms/Text";
+import { Button } from "@/components/atoms/Button";
 
 const HomeScreen: React.FC = () => {
   const { user, logout } = useAuthStore();
   const { theme } = useTheme();
   const styles = createHomeStyles(theme);
+
+  // Estado para el DatePicker
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  // Estado para el ServiceTime
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+
+  // Handler para el DatePicker
+  const handleDateChange = (date: Date | Date[] | null) => {
+    if (date instanceof Date) {
+      setSelectedDate(date);
+    } else if (Array.isArray(date)) {
+      setSelectedDate(date[0] || null);
+    } else {
+      setSelectedDate(null);
+    }
+  };
+
+  // Handler para el ServiceTime
+  const handleTimeChange = (time: string | null) => {
+    setSelectedTime(time);
+  };
 
   const handleLogout = () => {
     logout();
@@ -32,10 +53,7 @@ const HomeScreen: React.FC = () => {
     longitude: number;
     latitudeDelta: number;
     longitudeDelta: number;
-  }) => {
-    // TODO: Handle map region changes
-    // No hacer console.log para evitar spam en logs
-  };
+  }) => {};
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -45,43 +63,111 @@ const HomeScreen: React.FC = () => {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
-          <Text style={styles.title}>CarWashApp</Text>
-          <Text style={styles.subtitle}>Home Screen</Text>
-          <View style={{ marginTop: 16 }}>
+          <Text variant="heading" size="xxl" style={styles.title}>
+            CarWashApp
+          </Text>
+          <Text variant="subheading" size="lg" style={styles.subtitle}>
+            Home Screen
+          </Text>
+          <View style={styles.themeToggleContainer}>
             <ThemeToggle size="medium" />
           </View>
         </View>
 
         <View style={styles.content}>
           <View style={styles.welcomeSection}>
-            <Text style={styles.welcomeText}>
+            <Text variant="subheading" size="lg" style={styles.textPrimary}>
               Welcome, {user?.name || "User"}!
             </Text>
-            <Text style={styles.emailText}>{user?.email}</Text>
+            <Text variant="body" size="md" style={styles.textSecondary}>
+              {user?.email}
+            </Text>
           </View>
+
+          {/* DatePicker Section */}
+          <Card variant="default" size="large" style={styles.datePickerCard}>
+            <Text variant="label" size="md" style={styles.datePickerTitle}>
+              📅 Selecciona tu cita
+            </Text>
+
+            <View style={styles.datePickerRow}>
+              <View style={styles.datePickerColumn}>
+                <DatePicker
+                  variant="default"
+                  size="medium"
+                  mode="single"
+                  label="Fecha de lavado"
+                  placeholder="Elige una fecha"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  showTodayButton
+                  showClearButton
+                />
+              </View>
+            </View>
+
+            <View style={styles.datePickerRow}>
+              <View style={styles.datePickerColumn}>
+                <ServiceTime
+                  variant="default"
+                  size="medium"
+                  label="Hora de lavado"
+                  placeholder="Elige una hora"
+                  value={selectedTime}
+                  onChange={handleTimeChange}
+                  timeFormat="24h"
+                  interval={30}
+                  minTime="08:00"
+                  maxTime="18:00"
+                  showNowButton
+                  showClearButton
+                />
+              </View>
+            </View>
+          </Card>
 
           {/* Location Section */}
           <LocationSectionContainer
-            mapSize="medium"
+            mapSize="small"
             buttonSize="medium"
-            headerText="Selecciona donde lavar tu auto 🚗"
+            cardVariant="default"
+            cardSize="medium"
+            headerText="Selecciona un lugar 🚗"
             buttonText="Usar Mi Ubicación Actual"
             onLocationPress={handleLocationPress}
             onMapRegionChange={handleMapRegionChange}
           />
 
-          <View style={styles.features}>
-            <Text style={styles.featuresTitle}>Available Features:</Text>
-            <Text style={styles.featureItem}>• Car wash booking</Text>
-            <Text style={styles.featureItem}>• Service history</Text>
-            <Text style={styles.featureItem}>• Payment management</Text>
-            <Text style={styles.featureItem}>• Notifications</Text>
-          </View>
+          <Card variant="default" size="medium" style={styles.featuresCard}>
+            <Text variant="subheading" size="lg" style={styles.textPrimary}>
+              Available Features:
+            </Text>
+            <Text variant="body" size="md" style={styles.featureItemSecondary}>
+              • Car wash booking
+            </Text>
+            <Text variant="body" size="md" style={styles.featureItemSecondary}>
+              • Service history
+            </Text>
+            <Text variant="body" size="md" style={styles.featureItemSecondary}>
+              • Payment management
+            </Text>
+            <Text variant="body" size="md" style={styles.featureItemSecondary}>
+              • Notifications
+            </Text>
+            <Text variant="caption" size="sm" style={styles.textMuted}>
+              Last updated: {new Date().toLocaleDateString()}
+            </Text>
+          </Card>
         </View>
 
-        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-          <Text style={styles.logoutButtonText}>Logout</Text>
-        </TouchableOpacity>
+        <Button
+          variant="primary"
+          size="medium"
+          style={styles.logoutButton}
+          onPress={handleLogout}
+        >
+          Logout
+        </Button>
       </ScrollView>
     </SafeAreaView>
   );

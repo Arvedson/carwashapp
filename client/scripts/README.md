@@ -49,3 +49,6 @@ node scripts/toggle-screen.js
 - El script modifica automáticamente el archivo `App.tsx`
 - No es necesario reiniciar el servidor de Expo, solo recargar la app
 - El script es seguro y mantiene la estructura del código
+
+
+

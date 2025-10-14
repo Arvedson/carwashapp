@@ -46,3 +46,6 @@ export interface LocationMapProps extends ViewProps {
     longitudeDelta: number;
   }) => void;
 }
+
+
+

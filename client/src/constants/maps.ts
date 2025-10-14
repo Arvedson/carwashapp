@@ -33,3 +33,6 @@ export const MAP_CONFIG = {
   maxZoomLevel: 20,
   defaultZoomLevel: 15,
 };
+
+
+

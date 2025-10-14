@@ -4,3 +4,6 @@ export * from "./LoginForm";
 export * from "./ThemeDemo";
 export * from "./ThemeToggleSection";
 export * from "./LocationSectionContainer";
+export * from "./DatePicker";
+
+

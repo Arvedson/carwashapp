@@ -45,7 +45,7 @@ export const createBadgeStyles = (
       borderRadius: borders.radius.sm,
     },
     pill: {
-      borderRadius: 999, // Muy redondeado para forma de píldora
+      borderRadius: borders.radius.full, // Usar token para forma de píldora
     },
     square: {
       borderRadius: borders.radius.sm,

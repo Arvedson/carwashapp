@@ -1,24 +1,27 @@
 import { StyleSheet } from "react-native";
-import { Theme } from "@/themes/types";
+import { Theme } from "@/themes";
 
 export const createLocationMapStyles = (
   theme: Theme,
   size: "small" | "medium" | "large"
 ) => {
-  const height = size === "small" ? 200 : size === "medium" ? 300 : 400;
+  const { colors, borders, typography, components } = theme;
+
+  // Usar tokens de componentes
+  const sizeStyles = components.map.sizes[size];
 
   return StyleSheet.create({
     container: {
-      height: height,
-      backgroundColor: theme.colors.mapBackground,
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: theme.colors.mapBorder,
+      height: sizeStyles.height,
+      backgroundColor: colors.mapBackground,
+      borderRadius: sizeStyles.borderRadius,
+      borderWidth: borders.width.thin,
+      borderColor: colors.mapBorder,
       overflow: "hidden",
     },
     map: {
       flex: 1,
-      borderRadius: 12,
+      borderRadius: sizeStyles.borderRadius,
     },
     loadingOverlay: {
       position: "absolute",
@@ -26,15 +29,15 @@ export const createLocationMapStyles = (
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: theme.colors.mapOverlay,
+      backgroundColor: colors.mapOverlay,
       justifyContent: "center",
       alignItems: "center",
-      borderRadius: 12,
+      borderRadius: sizeStyles.borderRadius,
     },
     loadingText: {
-      color: theme.colors.text.inverse,
-      fontSize: 16,
-      fontWeight: "500",
+      color: colors.text.inverse,
+      fontSize: typography.fontSize.md,
+      fontWeight: typography.fontWeight.medium,
     },
   });
 };

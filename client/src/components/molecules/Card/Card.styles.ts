@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { Theme } from "@/themes";
 import { CardVariant, CardSize } from "./Card.types";
+import { borderPresets } from "@/themes/borders";
 
 export const createCardStyles = (
   theme: Theme,
@@ -12,7 +13,12 @@ export const createCardStyles = (
 
   return StyleSheet.create({
     card: {
-      borderRadius: borders.radius.lg,
+      // Usar presets de bordes para consistencia
+      borderRadius: borderPresets.card.radius,
+      borderWidth: borderPresets.card.width,
+      borderColor: colors.border,
+      backgroundColor: colors.surface,
+
       // Padding interno basado en size
       ...(padding && {
         ...(size === "small" && {
@@ -25,10 +31,15 @@ export const createCardStyles = (
           padding: spacing.lg,
         }),
       }),
+
       // Variantes
       ...(variant === "default" && {
+        // Usar preset base
+        borderRadius: borderPresets.card.radius,
+        borderWidth: borderPresets.card.width,
+        borderColor: colors.border,
         backgroundColor: colors.surface,
-        shadowColor: "#000",
+        shadowColor: colors.text.primary,
         shadowOffset: {
           width: 0,
           height: 1,
@@ -38,8 +49,12 @@ export const createCardStyles = (
         elevation: 1,
       }),
       ...(variant === "elevated" && {
+        // Usar preset base con sombra más pronunciada
+        borderRadius: borderPresets.card.radius,
+        borderWidth: borderPresets.card.width,
+        borderColor: colors.border,
         backgroundColor: colors.surface,
-        shadowColor: "#000",
+        shadowColor: colors.text.primary,
         shadowOffset: {
           width: 0,
           height: 4,
@@ -49,12 +64,34 @@ export const createCardStyles = (
         elevation: 4,
       }),
       ...(variant === "outlined" && {
-        backgroundColor: "transparent",
-        borderWidth: borders.width.thin,
+        // Usar preset outlined
+        borderRadius: borderPresets.cardOutlined.radius,
+        borderWidth: borderPresets.cardOutlined.width,
         borderColor: colors.border,
+        backgroundColor: "transparent",
+        shadowColor: "transparent",
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity: 0,
+        shadowRadius: 0,
+        elevation: 0,
       }),
       ...(variant === "filled" && {
+        // Usar preset base sin sombra
+        borderRadius: borderPresets.card.radius,
+        borderWidth: borderPresets.card.width,
+        borderColor: colors.border,
         backgroundColor: colors.surface,
+        shadowColor: "transparent",
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity: 0,
+        shadowRadius: 0,
+        elevation: 0,
       }),
     },
   });

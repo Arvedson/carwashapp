@@ -103,3 +103,6 @@ La app solicita automáticamente los siguientes permisos:
 - ✅ Soporte para tema claro/oscuro
 - ✅ Diferentes tamaños de mapa
 - ✅ Manejo de errores y permisos
+
+
+

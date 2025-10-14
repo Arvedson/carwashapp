@@ -1,36 +1,38 @@
 import { StyleSheet } from "react-native";
-import { Theme } from "@/themes/types";
+import { Theme } from "@/themes";
 
 export const createCurrentLocationButtonStyles = (
   theme: Theme,
   size: "small" | "medium" | "large",
   disabled: boolean
 ) => {
-  const minHeight = size === "small" ? 32 : size === "medium" ? 44 : 56;
-  const iconSize = size === "small" ? 16 : size === "medium" ? 20 : 24;
+  const { colors, spacing, borders, typography, components } = theme;
+
+  // Usar tokens de componentes
+  const sizeStyles = components.locationButton.sizes[size];
 
   return StyleSheet.create({
     button: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
-      minHeight: minHeight,
-      paddingHorizontal: 16,
-      paddingVertical: 8,
-      backgroundColor: disabled ? theme.colors.disabled : theme.colors.primary,
-      borderRadius: 8,
+      minHeight: sizeStyles.minHeight,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+      backgroundColor: disabled ? colors.disabled : colors.primary,
+      borderRadius: borders.radius.md,
       opacity: disabled ? 0.6 : 1,
     },
     text: {
-      fontSize: 16,
-      fontWeight: "600",
-      color: theme.colors.text.inverse,
-      marginLeft: 8,
+      fontSize: typography.fontSize.md,
+      fontWeight: typography.fontWeight.semibold,
+      color: colors.text.inverse,
+      marginLeft: spacing.sm,
     },
     icon: {
-      width: iconSize,
-      height: iconSize,
-      tintColor: theme.colors.text.inverse,
+      width: sizeStyles.iconSize,
+      height: sizeStyles.iconSize,
+      tintColor: colors.text.inverse,
     },
   });
 };

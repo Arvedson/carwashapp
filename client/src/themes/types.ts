@@ -50,6 +50,19 @@ export interface ThemeColors {
   mapLocationPin: string;
   mapRoute: string;
   mapOverlay: string;
+
+  // Calendar specific colors
+  calendarBackground: string;
+  calendarHeader: string;
+  calendarCell: string;
+  calendarCellSelected: string;
+  calendarCellToday: string;
+  calendarCellDisabled: string;
+  calendarText: string;
+  calendarTextSelected: string;
+  calendarTextDisabled: string;
+  calendarBorder: string;
+  calendarNavigation: string;
 }
 
 export interface ThemeTypography {
@@ -124,6 +137,14 @@ export interface ThemeBorders {
   };
 }
 
+export interface ThemeOpacity {
+  light: number;
+  medium: number;
+  heavy: number;
+  disabled: number;
+  overlay: number;
+}
+
 export interface ComponentSize {
   width?: number;
   height?: number;
@@ -140,6 +161,27 @@ export interface MapComponentSize extends ComponentSize {
 
 export interface LocationButtonComponentSize extends ComponentSize {
   iconSize: number;
+}
+
+export interface DatePickerComponentSize extends ComponentSize {
+  calendarHeight: number;
+  cellSize: number;
+  headerHeight: number;
+  weekHeight: number;
+  navigationButtonSize: number;
+  navigationIconSize: number;
+}
+
+export interface ServiceTimeComponentSize extends ComponentSize {
+  slotHeight: number;
+  maxListHeight: number;
+  buttonAreaHeight: number;
+}
+
+export interface ServiceTimeConfig {
+  defaultStartHour: number;
+  defaultEndHour: number;
+  defaultInterval: number;
 }
 
 export interface ThemeComponents {
@@ -228,6 +270,21 @@ export interface ThemeComponents {
       large: LocationButtonComponentSize;
     };
   };
+  datePicker: {
+    sizes: {
+      small: DatePickerComponentSize;
+      medium: DatePickerComponentSize;
+      large: DatePickerComponentSize;
+    };
+  };
+  serviceTime: {
+    sizes: {
+      small: ServiceTimeComponentSize;
+      medium: ServiceTimeComponentSize;
+      large: ServiceTimeComponentSize;
+    };
+    config: ServiceTimeConfig;
+  };
 }
 
 export interface Theme {
@@ -236,6 +293,7 @@ export interface Theme {
   spacing: ThemeSpacing;
   shadows: ThemeShadows;
   borders: ThemeBorders;
+  opacity: ThemeOpacity;
   components: ThemeComponents;
   isDark: boolean;
 }

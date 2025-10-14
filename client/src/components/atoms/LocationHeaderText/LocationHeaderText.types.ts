@@ -6,3 +6,4 @@ export interface LocationHeaderTextProps extends Omit<TextAtomProps, 'variant'> 
    */
   children: React.ReactNode;
 }
+
