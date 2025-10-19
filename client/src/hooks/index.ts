@@ -1,2 +1,4 @@
 // Export all custom hooks here
-// Example: export { useApi } from './useApi';
+export { useSearchData } from "./useSearchData";
+export { useSearch } from "./useSearch";
+export { useDynamicStyles } from "./useDynamicStyles";

@@ -207,12 +207,15 @@ export const createDatePickerStyles = (
 
     // Grid del calendario
     calendarGrid: {
-      padding: spacing.sm,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: spacing.xs,
     },
 
     calendarRow: {
       flexDirection: "row",
       marginBottom: spacing.xs,
+      justifyContent: "space-between",
+      alignItems: "center",
     },
 
     // Celda del calendario
@@ -221,8 +224,9 @@ export const createDatePickerStyles = (
       height: sizeStyles.cellSize,
       alignItems: "center",
       justifyContent: "center",
-      marginHorizontal: 1,
       borderRadius: borders.radius.sm,
+      flex: 1,
+      marginHorizontal: 0.5,
     },
 
     calendarCellSelected: {

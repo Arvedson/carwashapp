@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { Theme } from "../types";
 import { borderPresets } from "../borders";
+import { textStyles } from "../typography";
 
 export const createHomeStyles = (theme: Theme) => {
   const { colors, spacing, typography, borders } = theme;
@@ -16,7 +17,7 @@ export const createHomeStyles = (theme: Theme) => {
     },
     scrollContent: {
       flexGrow: 1,
-      padding: spacing.lg,
+      paddingBottom: spacing.xl,
     },
     header: {
       alignItems: "center",
@@ -145,6 +146,65 @@ export const createHomeStyles = (theme: Theme) => {
       fontWeight: typography.fontWeight.medium,
       marginBottom: spacing.md,
       textAlign: "center",
+    },
+
+    // Smart Hub Specific Styles - Following app patterns
+    smartHubContainer: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+    smartHubScrollContent: {
+      flexGrow: 1,
+      paddingBottom: spacing.xl,
+    },
+
+    // Section spacing following app patterns
+    sectionSpacing: {
+      marginVertical: spacing.md,
+    },
+
+    // Smart Hub specific text styles following typography presets
+    smartHubTitle: {
+      ...textStyles.h2,
+      color: colors.text.primary,
+      textAlign: "center",
+      marginBottom: spacing.lg,
+    },
+
+    smartHubSubtitle: {
+      ...textStyles.bodyLarge,
+      color: colors.text.secondary,
+      textAlign: "center",
+      marginBottom: spacing.xl,
+    },
+
+    // Loading states following app patterns
+    loadingContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: spacing.xl,
+    },
+
+    loadingText: {
+      ...textStyles.body,
+      color: colors.text.secondary,
+      marginTop: spacing.md,
+    },
+
+    // Error states following app patterns
+    errorContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: spacing.xl,
+    },
+
+    errorText: {
+      ...textStyles.body,
+      color: colors.error,
+      textAlign: "center",
+      marginTop: spacing.md,
     },
   });
 };

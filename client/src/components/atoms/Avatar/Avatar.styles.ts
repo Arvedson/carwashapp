@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { Theme } from "@/themes";
+import { Theme } from "@/themes/types";
 import { AvatarSize, AvatarVariant } from "./Avatar.types";
 
 export const createAvatarStyles = (
@@ -11,8 +11,11 @@ export const createAvatarStyles = (
 ) => {
   const { colors, borders, typography, components } = theme;
 
-  // Usar tokens de componentes
-  const sizeStyles = components.avatar.sizes[size];
+  // Usar tokens de componentes con fallback
+  const sizeStyles = components.avatar?.sizes?.[size] || {
+    width: 40,
+    height: 40,
+  };
 
   // Calcular fontSize basado en el tamaño del avatar
   const fontSizeMap = {
@@ -24,7 +27,7 @@ export const createAvatarStyles = (
     xxl: typography.fontSize.xxl,
   };
 
-  const fontSize = fontSizeMap[size];
+  const fontSize = fontSizeMap[size] || typography.fontSize.md;
 
   // Mapeo de variantes
   const variantMap = {
@@ -39,7 +42,7 @@ export const createAvatarStyles = (
     },
   };
 
-  const variantStyles = variantMap[variant];
+  const variantStyles = variantMap[variant] || variantMap.circle;
 
   return StyleSheet.create({
     avatar: {

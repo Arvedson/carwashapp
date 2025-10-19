@@ -3,11 +3,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useAuthStore } from "@/store/useAuthStore";
 import LoginScreen from "@/components/pages/Login/LoginScreen";
-import HomeScreen from "@/components/pages/Home/HomeScreen";
+import BottomTabNavigator from "./BottomTabNavigator";
 
 export type RootStackParamList = {
   Login: undefined;
-  Home: undefined;
+  Main: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -27,7 +27,7 @@ const AppNavigator: React.FC = () => {
         }}
       >
         {isAuthenticated ? (
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Main" component={BottomTabNavigator} />
         ) : (
           <Stack.Screen name="Login" component={LoginScreen} />
         )}

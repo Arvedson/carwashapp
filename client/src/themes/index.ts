@@ -28,3 +28,6 @@ export { layoutStyles } from "./components/Layout.styles";
 // Export screen styles
 export { createHomeStyles } from "./screens/HomeScreen.styles";
 export { loginStyles } from "./screens/LoginScreen.styles";
+export { createBookingsStyles } from "./screens/BookingsScreen.styles";
+export { createServicesStyles } from "./screens/ServicesScreen.styles";
+export { createProfileStyles } from "./screens/ProfileScreen.styles";

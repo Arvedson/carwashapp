@@ -40,7 +40,14 @@ const getDaysInMonth = (date: Date): number => {
 
 const getFirstDayOfMonth = (date: Date, firstDayOfWeek: number = 1): number => {
   const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-  return (firstDay - firstDayOfWeek + 7) % 7;
+  // JavaScript getDay(): 0 = Domingo, 1 = Lunes, 2 = Martes, ..., 6 = Sábado
+  // firstDayOfWeek: 0 = Domingo, 1 = Lunes
+  // Calcular cuántos días del mes anterior necesitamos mostrar
+  let offset = firstDay - firstDayOfWeek;
+  if (offset < 0) {
+    offset += 7;
+  }
+  return offset;
 };
 
 const isSameDay = (date1: Date, date2: Date): boolean => {
@@ -307,28 +314,35 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     new Animated.Value(state.isExpanded ? 1 : 0)
   );
 
-  // Días de la semana
+  // Días de la semana - Reorganizar según firstDayOfWeek
   const weekDays = useMemo(() => {
     const days = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+    // Si firstDayOfWeek = 1 (Lunes), empezar desde "Lun"
+    // Si firstDayOfWeek = 0 (Domingo), empezar desde "Dom"
     const startIndex = firstDayOfWeek;
     return [...days.slice(startIndex), ...days.slice(0, startIndex)];
   }, [firstDayOfWeek]);
 
-  // Generar días del mes actual
+  // Generar días del mes actual para el calendario
   const calendarDays = useMemo(() => {
     const daysInMonth = getDaysInMonth(state.currentMonth);
     const firstDay = getFirstDayOfMonth(state.currentMonth, firstDayOfWeek);
     const days: (Date | null)[] = [];
 
-    // Días del mes anterior
-    for (let i = 0; i < firstDay; i++) {
+    // 1. Días del mes anterior (para llenar espacios vacíos al inicio)
+    if (firstDay > 0) {
       const prevMonth = new Date(state.currentMonth);
       prevMonth.setMonth(prevMonth.getMonth() - 1);
-      const day = getDaysInMonth(prevMonth) - firstDay + i + 1;
-      days.push(new Date(prevMonth.getFullYear(), prevMonth.getMonth(), day));
+      const daysInPrevMonth = getDaysInMonth(prevMonth);
+
+      // Agregar días del final del mes anterior
+      for (let i = firstDay - 1; i >= 0; i--) {
+        const day = daysInPrevMonth - i;
+        days.push(new Date(prevMonth.getFullYear(), prevMonth.getMonth(), day));
+      }
     }
 
-    // Días del mes actual
+    // 2. Días del mes actual
     for (let day = 1; day <= daysInMonth; day++) {
       days.push(
         new Date(
@@ -339,12 +353,23 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       );
     }
 
-    // Días del mes siguiente para completar la grilla
-    const remainingDays = 42 - days.length; // 6 filas x 7 días
-    for (let day = 1; day <= remainingDays; day++) {
+    // 3. Días del mes siguiente (para completar la grilla de 6x7 = 42 días)
+    const totalDays = days.length;
+    const remainingDays = 42 - totalDays;
+
+    if (remainingDays > 0) {
       const nextMonth = new Date(state.currentMonth);
       nextMonth.setMonth(nextMonth.getMonth() + 1);
-      days.push(new Date(nextMonth.getFullYear(), nextMonth.getMonth(), day));
+
+      // Agregar días del inicio del mes siguiente
+      for (let day = 1; day <= remainingDays; day++) {
+        days.push(new Date(nextMonth.getFullYear(), nextMonth.getMonth(), day));
+      }
+    }
+
+    // Asegurar que siempre tengamos exactamente 42 días
+    while (days.length < 42) {
+      days.push(null);
     }
 
     return days;
@@ -523,13 +548,28 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         <WeekHeader weekDays={weekDays} />
 
         <View style={styles.calendarGrid}>
-          {Array.from({ length: 6 }, (_, rowIndex) => (
-            <View key={rowIndex} style={styles.calendarRow}>
-              {calendarDays
-                .slice(rowIndex * 7, (rowIndex + 1) * 7)
-                .map((date, cellIndex) => {
-                  if (!date)
-                    return <View key={cellIndex} style={styles.calendarCell} />;
+          {Array.from({ length: 6 }, (_, rowIndex) => {
+            const rowDays = calendarDays.slice(
+              rowIndex * 7,
+              (rowIndex + 1) * 7
+            );
+
+            return (
+              <View key={rowIndex} style={styles.calendarRow}>
+                {rowDays.map((date, cellIndex) => {
+                  // Si no hay fecha, renderizar celda vacía
+                  if (!date) {
+                    return (
+                      <View
+                        key={`empty-${rowIndex}-${cellIndex}`}
+                        style={styles.calendarCell}
+                      >
+                        <Text style={[styles.calendarCellText, { opacity: 0 }]}>
+                          {" "}
+                        </Text>
+                      </View>
+                    );
+                  }
 
                   const isSelected =
                     mode === "single"
@@ -568,8 +608,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                     />
                   );
                 })}
-            </View>
-          ))}
+              </View>
+            );
+          })}
         </View>
 
         {(showTodayButton || showClearButton) && (
