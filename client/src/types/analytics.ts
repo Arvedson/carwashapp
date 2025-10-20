@@ -87,3 +87,7 @@ export const DEFAULT_ANALYTICS_CONFIG: AnalyticsConfig = {
   flushInterval: 30000, // 30 segundos
   debugMode: process.env.NODE_ENV === "development",
 };
+
+
+
+

@@ -1,3 +1,4 @@
+import { ViewStyle, TextStyle } from "react-native";
 import { RecentWash, FavoriteLocation } from "@/types";
 
 export interface QuickAccessSectionProps {
@@ -5,11 +6,12 @@ export interface QuickAccessSectionProps {
   favoriteLocations: FavoriteLocation[];
   onRepeatWash: () => void;
   onSelectLocation: (location: FavoriteLocation) => void;
-  style?: any;
+  onAddLocation?: () => void;
+  style?: ViewStyle;
 }
 
 export interface QuickAccessSectionStyles {
-  container: any;
-  title: any;
-  content: any;
+  container: ViewStyle;
+  title: TextStyle;
+  content: ViewStyle;
 }

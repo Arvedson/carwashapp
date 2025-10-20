@@ -2,12 +2,14 @@ import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Text } from "@/components/atoms/Text";
+import { AddLocationButton } from "@/components/atoms/AddLocationButton";
 import { FavoriteLocationsProps } from "./FavoriteLocations.types";
 import { createFavoriteLocationsStyles } from "./FavoriteLocations.styles";
 
 const FavoriteLocations: React.FC<FavoriteLocationsProps> = ({
   locations,
   onSelect,
+  onAddLocation,
   style,
 }) => {
   const { theme } = useTheme();
@@ -19,6 +21,14 @@ const FavoriteLocations: React.FC<FavoriteLocationsProps> = ({
         <Text style={styles.title}>Tus ubicaciones favoritas</Text>
         <View style={styles.emptyState}>
           <Text style={styles.emptyText}>No tienes ubicaciones guardadas</Text>
+          {onAddLocation && (
+            <View style={styles.addButtonContainer}>
+              <AddLocationButton
+                onPress={onAddLocation}
+                text="Agregar ubicación"
+              />
+            </View>
+          )}
         </View>
       </View>
     );

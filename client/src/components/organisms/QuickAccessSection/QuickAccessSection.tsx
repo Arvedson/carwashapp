@@ -12,6 +12,7 @@ const QuickAccessSection: React.FC<QuickAccessSectionProps> = ({
   favoriteLocations,
   onRepeatWash,
   onSelectLocation,
+  onAddLocation,
   style,
 }) => {
   const { theme } = useTheme();
@@ -27,6 +28,7 @@ const QuickAccessSection: React.FC<QuickAccessSectionProps> = ({
         <FavoriteLocations
           locations={favoriteLocations}
           onSelect={onSelectLocation}
+          onAddLocation={onAddLocation}
         />
       </View>
     </View>

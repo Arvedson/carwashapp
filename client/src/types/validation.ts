@@ -58,3 +58,7 @@ export const VALIDATION_MESSAGES = {
   INVALID_RATING: "La calificación mínima debe estar entre 1 y 5",
   INVALID_PRICE: "El precio máximo debe ser mayor a 0",
 } as const;
+
+
+
+

@@ -13,3 +13,4 @@ export * from "./HeaderSection";
 export * from "./RequestCard";
 export * from "./QuickAccessSection";
 export * from "./PromotionsSection";
+export * from "./AddLocationModal";

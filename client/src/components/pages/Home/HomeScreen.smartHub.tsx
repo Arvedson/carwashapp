@@ -5,11 +5,13 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { createHomeStyles } from "@/themes/screens/HomeScreen.styles";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useSearch } from "@/hooks/useSearch";
+import { useLocationManagement } from "@/hooks/useLocationManagement";
 import { HeaderSection } from "@/components/organisms/HeaderSection";
 import { RequestCard } from "@/components/organisms/RequestCard";
 import { QuickAccessSection } from "@/components/organisms/QuickAccessSection";
 import { PromotionsSection } from "@/components/organisms/PromotionsSection";
 import { DatePickerModal } from "@/components/organisms/DatePickerModal";
+import { AddLocationModal } from "@/components/organisms/AddLocationModal";
 import {
   VehicleType,
   DirtLevel,
@@ -20,6 +22,7 @@ import {
   TrustFeature,
   Location,
 } from "@/types";
+import { LocationFormData } from "@/components/molecules/LocationForm";
 
 const HomeScreen: React.FC = () => {
   const { user, logout } = useAuthStore();
@@ -58,6 +61,20 @@ const HomeScreen: React.FC = () => {
     userId: user?.id,
     useSimulation: true, // Cambiar a false en producción
   });
+
+  // Hook de gestión de ubicaciones - Maneja ubicaciones favoritas
+  const {
+    favoriteLocations: managedFavoriteLocations,
+    isModalVisible: isLocationModalVisible,
+    isLoading: isLocationLoading,
+    selectedLocation: selectedLocationForModal,
+    openAddLocationModal,
+    closeAddLocationModal,
+    addFavoriteLocation,
+    selectLocation,
+    handleLocationSelect,
+    handleCurrentLocationPress,
+  } = useLocationManagement();
 
   // Mock data - En producción esto vendría de APIs
   const vehicles: VehicleType[] = [
@@ -140,24 +157,8 @@ const HomeScreen: React.FC = () => {
     location: "Col. Reforma, Oaxaca",
   };
 
-  const favoriteLocations: FavoriteLocation[] = [
-    {
-      id: "home",
-      name: "Casa",
-      icon: "🏡",
-      address: "Col. Reforma, Oaxaca",
-      location: { latitude: 17.0732, longitude: -96.7266 },
-      type: "home",
-    },
-    {
-      id: "work",
-      name: "Trabajo",
-      icon: "🏢",
-      address: "Centro Histórico, Oaxaca",
-      location: { latitude: 17.0599, longitude: -96.7266 },
-      type: "work",
-    },
-  ];
+  // Usar las ubicaciones favoritas del hook de gestión
+  const favoriteLocations = managedFavoriteLocations;
 
   const promotions: Promotion[] = [
     {
@@ -280,6 +281,18 @@ const HomeScreen: React.FC = () => {
       latitudeDelta: 0.01,
       longitudeDelta: 0.01,
     });
+    // También actualizar la ubicación seleccionada en el hook
+    selectLocation(location);
+  };
+
+  const handleAddLocation = () => {
+    console.log("Add location pressed");
+    openAddLocationModal();
+  };
+
+  const handleLocationSave = (locationData: LocationFormData) => {
+    console.log("Location saved:", locationData);
+    addFavoriteLocation(locationData);
   };
 
   const handlePromoPress = (promotion: Promotion) => {
@@ -342,6 +355,7 @@ const HomeScreen: React.FC = () => {
           favoriteLocations={favoriteLocations}
           onRepeatWash={handleRepeatWash}
           onSelectLocation={handleSelectLocation}
+          onAddLocation={handleAddLocation}
         />
 
         {/* Promotions Section */}
@@ -361,6 +375,17 @@ const HomeScreen: React.FC = () => {
         minDate={new Date()}
         title="Programar lavado"
         subtitle="Elige cuándo quieres que te visiten para el lavado de tu vehículo"
+      />
+
+      {/* Add Location Modal */}
+      <AddLocationModal
+        visible={isLocationModalVisible}
+        onClose={closeAddLocationModal}
+        onLocationSave={handleLocationSave}
+        selectedLocation={selectedLocationForModal}
+        isLoading={isLocationLoading}
+        title="Agregar ubicación favorita"
+        subtitle="Selecciona una ubicación y configúrala para acceso rápido"
       />
     </SafeAreaView>
   );

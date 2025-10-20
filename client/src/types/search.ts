@@ -107,3 +107,7 @@ export interface SearchServiceMethods {
   simulateSearch: (searchData: SearchRequest) => Promise<SearchResponse>;
   validateSearchData: (searchData: SearchRequest) => boolean;
 }
+
+
+
+

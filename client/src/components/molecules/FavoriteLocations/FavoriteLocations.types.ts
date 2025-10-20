@@ -1,18 +1,21 @@
+import { ViewStyle, TextStyle } from "react-native";
 import { FavoriteLocation } from "@/types";
 
 export interface FavoriteLocationsProps {
   locations: FavoriteLocation[];
   onSelect: (location: FavoriteLocation) => void;
-  style?: any;
+  onAddLocation?: () => void;
+  style?: ViewStyle;
 }
 
 export interface FavoriteLocationsStyles {
-  container: any;
-  title: any;
-  locationsRow: any;
-  locationChip: any;
-  locationIcon: any;
-  locationName: any;
-  emptyState: any;
-  emptyText: any;
+  container: ViewStyle;
+  title: TextStyle;
+  locationsRow: ViewStyle;
+  locationChip: ViewStyle;
+  locationIcon: TextStyle;
+  locationName: TextStyle;
+  emptyState: ViewStyle;
+  emptyText: TextStyle;
+  addButtonContainer: ViewStyle;
 }

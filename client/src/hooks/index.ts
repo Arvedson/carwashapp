@@ -2,3 +2,4 @@
 export { useSearchData } from "./useSearchData";
 export { useSearch } from "./useSearch";
 export { useDynamicStyles } from "./useDynamicStyles";
+export { useLocationManagement } from "./useLocationManagement";

@@ -47,5 +47,9 @@ export const createFavoriteLocationsStyles = (theme: Theme) => {
       color: colors.text.secondary,
       textAlign: "center",
     },
+    addButtonContainer: {
+      marginTop: spacing.md,
+      alignItems: "center",
+    },
   });
 };

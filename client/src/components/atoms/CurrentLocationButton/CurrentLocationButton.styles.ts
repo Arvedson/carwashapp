@@ -13,10 +13,12 @@ export const createCurrentLocationButtonStyles = (
 
   return StyleSheet.create({
     button: {
+      flex: 1, // Ocupa toda la altura y ancho disponible del contenedor
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
       minHeight: sizeStyles.minHeight,
+      width: "100%", // Asegura que ocupe todo el ancho disponible
       paddingHorizontal: spacing.md,
       paddingVertical: spacing.sm,
       backgroundColor: disabled ? colors.disabled : colors.primary,

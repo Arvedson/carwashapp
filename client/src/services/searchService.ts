@@ -145,3 +145,7 @@ class SearchService {
 
 // Instancia singleton del servicio
 export const searchService = new SearchService();
+
+
+
+

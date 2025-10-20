@@ -9,6 +9,8 @@ export interface User {
 export interface Location {
   latitude: number;
   longitude: number;
+  latitudeDelta: number;
+  longitudeDelta: number;
   address?: string;
   city?: string;
   state?: string;

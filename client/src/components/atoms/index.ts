@@ -20,3 +20,5 @@ export * from "./MenuItem";
 export * from "./UserGreeting";
 export * from "./LocationDisplay";
 export * from "./LocationButton";
+export * from "./AddLocationButton";
+export * from "./LocationTypeChip";

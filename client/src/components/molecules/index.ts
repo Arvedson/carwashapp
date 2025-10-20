@@ -16,3 +16,5 @@ export * from "./RecentWashCard";
 export * from "./FavoriteLocations";
 export * from "./PromoBanner";
 export * from "./TrustMiniCard";
+export * from "./LocationPicker";
+export * from "./LocationForm";

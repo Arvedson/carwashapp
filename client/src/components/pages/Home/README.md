@@ -260,7 +260,7 @@ const { theme } = useTheme();
 // Proporciona tema actual (claro/oscuro)
 ```
 
-### useSearch (NUEVO)
+### useSearch
 
 ```typescript
 const {
@@ -379,8 +379,6 @@ console.log("Current state:", {
 - `react` - Hooks y funcionalidad base
 - `react-native` - Componentes nativos
 - `react-native-safe-area-context` - SafeAreaView
-
-## 🆕 Archivos Creados en la Refactorización
 
 ### Tipos
 
