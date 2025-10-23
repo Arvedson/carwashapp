@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  carwash-server:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET:-dev_jwt_secret}
+      - JWT_EXPIRES_IN=7d
+      - CORS_ORIGIN=*
+    restart: unless-stopped
+    container_name: carwash-api-dev
+    volumes:
+      # Montar código fuente para hot reload
+      - ./src:/app/src
+      - ./package.json:/app/package.json
+      - ./tsconfig.json:/app/tsconfig.json
+      - ./prisma:/app/prisma
+    command: npm run dev
