@@ -45,27 +45,6 @@ export const lightColors: ThemeColors = {
   pressed: "#E0E0E0",
   focus: "#007AFF",
   disabled: "#F2F2F7",
-
-  // Map specific colors
-  mapBackground: "#F8F9FA",
-  mapBorder: "#E5E5EA",
-  mapMarker: "#007AFF",
-  mapLocationPin: "#FF3B30",
-  mapRoute: "#34C759",
-  mapOverlay: "rgba(0,0,0,0.3)",
-
-  // Calendar specific colors
-  calendarBackground: "#FFFFFF",
-  calendarHeader: "#F8F9FA",
-  calendarCell: "#FFFFFF",
-  calendarCellSelected: "#007AFF",
-  calendarCellToday: "#E3F2FD",
-  calendarCellDisabled: "#F5F5F5",
-  calendarText: "#000000",
-  calendarTextSelected: "#FFFFFF",
-  calendarTextDisabled: "#C7C7CC",
-  calendarBorder: "#E5E5EA",
-  calendarNavigation: "#007AFF",
 };
 
 export const darkColors: ThemeColors = {
@@ -113,25 +92,4 @@ export const darkColors: ThemeColors = {
   pressed: "#1C1C1E",
   focus: "#0A84FF",
   disabled: "#1C1C1E",
-
-  // Map specific colors (dark theme)
-  mapBackground: "#2C2C2E",
-  mapBorder: "#38383A",
-  mapMarker: "#0A84FF",
-  mapLocationPin: "#FF453A",
-  mapRoute: "#30D158",
-  mapOverlay: "rgba(0,0,0,0.5)",
-
-  // Calendar specific colors (dark theme)
-  calendarBackground: "#1C1C1E",
-  calendarHeader: "#2C2C2E",
-  calendarCell: "#1C1C1E",
-  calendarCellSelected: "#0A84FF",
-  calendarCellToday: "#1A1A1A",
-  calendarCellDisabled: "#2C2C2E",
-  calendarText: "#FFFFFF",
-  calendarTextSelected: "#FFFFFF",
-  calendarTextDisabled: "#48484A",
-  calendarBorder: "#38383A",
-  calendarNavigation: "#0A84FF",
 };

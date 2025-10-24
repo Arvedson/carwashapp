@@ -53,8 +53,6 @@ export type IconName =
   | "chevron-right" // Chevron derecha
   | "chevron-up" // Chevron arriba
   | "chevron-down" // Chevron abajo
-  | "chevron-double-left" // Doble chevron izquierda
-  | "chevron-double-right" // Doble chevron derecha
   | "info" // Información
   | "warning" // Advertencia
   | "error" // Error
@@ -67,3 +65,6 @@ export interface IconAtomProps {
   color?: string;
   style?: ViewStyle;
 }
+
+
+

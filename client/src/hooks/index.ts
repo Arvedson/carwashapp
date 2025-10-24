@@ -1,5 +1,2 @@
 // Export all custom hooks here
-export { useSearchData } from "./useSearchData";
-export { useSearch } from "./useSearch";
-export { useDynamicStyles } from "./useDynamicStyles";
-export { useLocationManagement } from "./useLocationManagement";
+// Example: export { useApi } from './useApi';

@@ -6,24 +6,7 @@ export const createThemeToggleStyles = (
   theme: Theme,
   size: ThemeToggleSize
 ) => {
-  const { colors, borders, components } = theme;
-
-  // Usar tokens de componentes
-  const sizeStyles = components.themeToggle.sizes[size];
-
-  // Mapeo de padding basado en el tamaño
-  const paddingMap = {
-    small: 8,
-    medium: 12,
-    large: 16,
-  };
-
-  // Mapeo de iconSize basado en el tamaño
-  const iconSizeMap = {
-    small: 16,
-    medium: 20,
-    large: 24,
-  };
+  const { colors, spacing, borders, typography } = theme;
 
   return StyleSheet.create({
     container: {
@@ -31,14 +14,34 @@ export const createThemeToggleStyles = (
       justifyContent: "center",
       borderRadius: borders.radius.md,
       backgroundColor: colors.surface,
-      padding: paddingMap[size],
-      minHeight: sizeStyles.minHeight,
-      minWidth: sizeStyles.minHeight, // Usar minHeight para mantener forma cuadrada
-      borderWidth: borders.width.thin,
-      borderColor: colors.border,
+      // Tamaños
+      ...(size === "small" && {
+        padding: spacing.sm,
+        minHeight: theme.components.themeToggle.sizes.small.minHeight,
+        minWidth: theme.components.themeToggle.sizes.small.minHeight,
+      }),
+      ...(size === "medium" && {
+        padding: spacing.md,
+        minHeight: theme.components.themeToggle.sizes.medium.minHeight,
+        minWidth: theme.components.themeToggle.sizes.medium.minHeight,
+      }),
+      ...(size === "large" && {
+        padding: spacing.lg,
+        minHeight: theme.components.themeToggle.sizes.large.minHeight,
+        minWidth: theme.components.themeToggle.sizes.large.minHeight,
+      }),
     },
     icon: {
-      fontSize: iconSizeMap[size],
+      // Tamaños de icono usando tokens
+      ...(size === "small" && {
+        fontSize: typography.fontSize.md,
+      }),
+      ...(size === "medium" && {
+        fontSize: typography.fontSize.lg,
+      }),
+      ...(size === "large" && {
+        fontSize: typography.fontSize.xl,
+      }),
     },
   });
 };

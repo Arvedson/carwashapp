@@ -4,14 +4,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuthStore } from "@/store/useAuthStore";
 import { createHomeStyles } from "@/themes/screens/HomeScreen.styles";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useSearch } from "@/hooks/useSearch";
-import { useLocationManagement } from "@/hooks/useLocationManagement";
 import { HeaderSection } from "@/components/organisms/HeaderSection";
 import { RequestCard } from "@/components/organisms/RequestCard";
 import { QuickAccessSection } from "@/components/organisms/QuickAccessSection";
 import { PromotionsSection } from "@/components/organisms/PromotionsSection";
 import { DatePickerModal } from "@/components/organisms/DatePickerModal";
-import { AddLocationModal } from "@/components/organisms/AddLocationModal";
 import {
   VehicleType,
   DirtLevel,
@@ -22,14 +19,13 @@ import {
   TrustFeature,
   Location,
 } from "@/types";
-import { LocationFormData } from "@/components/molecules/LocationForm";
 
 const HomeScreen: React.FC = () => {
   const { user, logout } = useAuthStore();
   const { theme } = useTheme();
   const styles = createHomeStyles(theme);
 
-  // Smart Hub State - Solo estado de UI y selecciones
+  // Smart Hub State
   const [currentLocation, setCurrentLocation] = useState<Location | null>(null);
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleType | null>(
     null
@@ -41,40 +37,7 @@ const HomeScreen: React.FC = () => {
     useState<TimeChoice | null>(null);
   const [scheduledDate, setScheduledDate] = useState<Date | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
-
-  // Hook de búsqueda - Maneja toda la lógica de búsqueda
-  const {
-    searchData,
-    isSearchReady,
-    isLoading,
-    error,
-    lastSearchResults,
-    searchWashers,
-    clearError,
-    resetSearch,
-  } = useSearch({
-    selectedVehicle,
-    selectedDirtLevel,
-    selectedTimeChoice,
-    scheduledDate,
-    currentLocation,
-    userId: user?.id,
-    useSimulation: true, // Cambiar a false en producción
-  });
-
-  // Hook de gestión de ubicaciones - Maneja ubicaciones favoritas
-  const {
-    favoriteLocations: managedFavoriteLocations,
-    isModalVisible: isLocationModalVisible,
-    isLoading: isLocationLoading,
-    selectedLocation: selectedLocationForModal,
-    openAddLocationModal,
-    closeAddLocationModal,
-    addFavoriteLocation,
-    selectLocation,
-    handleLocationSelect,
-    handleCurrentLocationPress,
-  } = useLocationManagement();
+  const [isLoading, setIsLoading] = useState(false);
 
   // Mock data - En producción esto vendría de APIs
   const vehicles: VehicleType[] = [
@@ -157,8 +120,24 @@ const HomeScreen: React.FC = () => {
     location: "Col. Reforma, Oaxaca",
   };
 
-  // Usar las ubicaciones favoritas del hook de gestión
-  const favoriteLocations = managedFavoriteLocations;
+  const favoriteLocations: FavoriteLocation[] = [
+    {
+      id: "home",
+      name: "Casa",
+      icon: "🏡",
+      address: "Col. Reforma, Oaxaca",
+      location: { latitude: 17.0732, longitude: -96.7266 },
+      type: "home",
+    },
+    {
+      id: "work",
+      name: "Trabajo",
+      icon: "🏢",
+      address: "Centro Histórico, Oaxaca",
+      location: { latitude: 17.0599, longitude: -96.7266 },
+      type: "work",
+    },
+  ];
 
   const promotions: Promotion[] = [
     {
@@ -211,46 +190,20 @@ const HomeScreen: React.FC = () => {
     setSelectedTimeChoice(choice);
   };
 
-  const handleSearch = async () => {
-    console.log("🔍 Iniciando búsqueda desde HomeScreen...");
-    const results = await searchWashers();
-
-    if (results) {
-      console.log("✅ Búsqueda exitosa, navegando a resultados...", results);
-      // TODO: Navegar a pantalla de resultados o mostrar mapa
-      // navigation.navigate('SearchResults', { results });
-    } else {
-      console.log("❌ Búsqueda falló o fue cancelada");
-    }
-  };
-
-  const handleClearError = () => {
-    clearError();
-  };
-
-  const handleResetSearch = () => {
-    resetSearch();
-    console.log("🔄 Búsqueda reseteada");
-  };
-
-  // Efecto para manejar errores y logging
-  useEffect(() => {
-    if (error) {
-      console.error("❌ Error en búsqueda:", error);
-      // Aquí podrías mostrar un toast o alert al usuario
-    }
-  }, [error]);
-
-  // Efecto para logging de cambios en el estado de búsqueda
-  useEffect(() => {
-    console.log("📊 Estado de búsqueda actualizado:", {
-      isSearchReady,
-      isLoading,
-      hasError: !!error,
-      hasResults: !!lastSearchResults,
-      searchData,
+  const handleSearch = () => {
+    setIsLoading(true);
+    console.log("Searching for washers...", {
+      vehicle: selectedVehicle,
+      dirtLevel: selectedDirtLevel,
+      timeChoice: selectedTimeChoice,
     });
-  }, [isSearchReady, isLoading, error, lastSearchResults, searchData]);
+
+    // Simulate API call
+    setTimeout(() => {
+      setIsLoading(false);
+      // TODO: Navigate to results or show map
+    }, 2000);
+  };
 
   const handleSchedulePress = () => {
     console.log("Schedule pressed");
@@ -281,18 +234,6 @@ const HomeScreen: React.FC = () => {
       latitudeDelta: 0.01,
       longitudeDelta: 0.01,
     });
-    // También actualizar la ubicación seleccionada en el hook
-    selectLocation(location);
-  };
-
-  const handleAddLocation = () => {
-    console.log("Add location pressed");
-    openAddLocationModal();
-  };
-
-  const handleLocationSave = (locationData: LocationFormData) => {
-    console.log("Location saved:", locationData);
-    addFavoriteLocation(locationData);
   };
 
   const handlePromoPress = (promotion: Promotion) => {
@@ -355,7 +296,6 @@ const HomeScreen: React.FC = () => {
           favoriteLocations={favoriteLocations}
           onRepeatWash={handleRepeatWash}
           onSelectLocation={handleSelectLocation}
-          onAddLocation={handleAddLocation}
         />
 
         {/* Promotions Section */}
@@ -375,17 +315,6 @@ const HomeScreen: React.FC = () => {
         minDate={new Date()}
         title="Programar lavado"
         subtitle="Elige cuándo quieres que te visiten para el lavado de tu vehículo"
-      />
-
-      {/* Add Location Modal */}
-      <AddLocationModal
-        visible={isLocationModalVisible}
-        onClose={closeAddLocationModal}
-        onLocationSave={handleLocationSave}
-        selectedLocation={selectedLocationForModal}
-        isLoading={isLocationLoading}
-        title="Agregar ubicación favorita"
-        subtitle="Selecciona una ubicación y configúrala para acceso rápido"
       />
     </SafeAreaView>
   );
