@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/contexts/ThemeContext";
-import HomeScreen from "@/components/pages/Home/HomeScreen";
+import HomeScreen from "@/components/pages/Home/HomeScreen.smartHub";
 import BookingsScreen from "@/components/pages/Bookings/BookingsScreen";
 import ServicesScreen from "@/components/pages/Services/ServicesScreen";
 import ProfileScreen from "@/components/pages/Profile/ProfileScreen";

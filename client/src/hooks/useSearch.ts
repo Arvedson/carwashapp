@@ -84,10 +84,8 @@ export const useSearch = ({
         timestamp: new Date().toISOString(),
       });
 
-      // Realizar búsqueda (real o simulada)
-      const results = useSimulation
-        ? await searchService.simulateSearch(searchData)
-        : await searchService.searchWashers(searchData);
+      // Realizar búsqueda
+      const results = await searchService.searchWashers(searchData);
 
       setLastSearchResults(results);
       console.log("✅ Búsqueda completada exitosamente:", results);
@@ -147,8 +145,3 @@ export const useSearch = ({
     resetSearch,
   };
 };
-
-
-
-
-

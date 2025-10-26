@@ -18,13 +18,13 @@ class SearchService {
   }
 
   /**
-   * Realiza una búsqueda real de lavadores
+   * Realiza una búsqueda de lavadores
    * @param searchData - Datos de búsqueda
    * @returns Promise con resultados de búsqueda
    */
   async searchWashers(searchData: SearchRequest): Promise<SearchResponse> {
     try {
-      console.log("🔍 Realizando búsqueda real de lavadores...", searchData);
+      console.log("🔍 Realizando búsqueda de lavadores...", searchData);
 
       const response = await fetch(
         `${this.config.baseUrl}/api/search/washers`,
@@ -47,41 +47,12 @@ class SearchService {
 
       const result = await response.json();
 
-      console.log("✅ Búsqueda real completada:", result);
+      console.log("✅ Búsqueda completada:", result);
       return result;
     } catch (error) {
-      console.error("❌ Error en búsqueda real:", error);
+      console.error("❌ Error en búsqueda:", error);
       throw error;
     }
-  }
-
-  /**
-   * Simula una búsqueda de lavadores (para desarrollo)
-   * @param searchData - Datos de búsqueda
-   * @returns Promise con resultados simulados
-   */
-  async simulateSearch(searchData: SearchRequest): Promise<SearchResponse> {
-    console.log("🔍 Simulando búsqueda de lavadores...", searchData);
-
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const mockResponse: SearchResponse = {
-          washers: [],
-          totalResults: 0,
-          searchId: `search_${Date.now()}`,
-          searchTimestamp: new Date().toISOString(),
-          searchRadius: searchData.searchRadius,
-          filters: {
-            minRating: searchData.minRating,
-            maxPrice: searchData.maxPrice,
-            verifiedOnly: searchData.verifiedOnly,
-          },
-        };
-
-        console.log("✅ Simulación de búsqueda completada:", mockResponse);
-        resolve(mockResponse);
-      }, 2000); // Simular delay de 2 segundos
-    });
   }
 
   /**
@@ -145,8 +116,3 @@ class SearchService {
 
 // Instancia singleton del servicio
 export const searchService = new SearchService();
-
-
-
-
-

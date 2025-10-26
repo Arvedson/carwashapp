@@ -3,9 +3,11 @@ import { Text } from "react-native";
 import { Container } from "@/components/organisms/Container";
 import { LoginForm } from "@/components/organisms/LoginForm";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useAuthNavigation } from "@/hooks/useAuthNavigation";
 
 const LoginScreen: React.FC = () => {
   const { theme } = useTheme();
+  const { goToRegister } = useAuthNavigation();
   const colors = theme.colors;
   const spacing = theme.spacing;
 
@@ -29,8 +31,9 @@ const LoginScreen: React.FC = () => {
       style={{ backgroundColor: colors.background }}
     >
       <Text style={dynamicStyles.title}>CarWashApp</Text>
-      <Text style={dynamicStyles.subtitle}>Login Screen</Text>
-      <LoginForm />
+      <Text style={dynamicStyles.subtitle}>Iniciar Sesión</Text>
+
+      <LoginForm onSwitchToRegister={goToRegister} />
     </Container>
   );
 };

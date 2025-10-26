@@ -1,6 +1,6 @@
 export const CONFIG = {
   APP_NAME: "CarWashApp",
-  API_URL: "https://api.carwashapp.com",
+  API_URL: process.env.EXPO_PUBLIC_API_URL || "http://192.168.1.74:3000/api",
   VERSION: "1.0.0",
 } as const;
 

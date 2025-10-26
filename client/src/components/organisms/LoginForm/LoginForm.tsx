@@ -5,7 +5,11 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { useTheme } from "@/contexts/ThemeContext";
 import { LoginCredentials } from "@/types";
 
-const LoginForm: React.FC = () => {
+interface LoginFormProps {
+  onSwitchToRegister?: () => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
   const [credentials, setCredentials] = useState<LoginCredentials>({
     email: "",
     password: "",
@@ -18,7 +22,7 @@ const LoginForm: React.FC = () => {
 
   const handleLogin = async () => {
     if (!credentials.email || !credentials.password) {
-      Alert.alert("Error", "Please fill in all fields");
+      Alert.alert("Error", "Por favor completa todos los campos");
       return;
     }
 
@@ -28,11 +32,11 @@ const LoginForm: React.FC = () => {
       if (!success) {
         Alert.alert(
           "Error",
-          "Invalid credentials. Use test@example.com / password"
+          "Credenciales inválidas. Verifica tu email y contraseña"
         );
       }
     } catch (error) {
-      Alert.alert("Error", "Login failed");
+      Alert.alert("Error", "Error al iniciar sesión");
     } finally {
       setLoading(false);
     }
@@ -79,11 +83,10 @@ const LoginForm: React.FC = () => {
       <Button
         variant="outline"
         size="medium"
-        onPress={() => {
-          setCredentials({ email: "test@example.com", password: "password" });
-        }}
+        onPress={onSwitchToRegister}
+        style={{ marginBottom: spacing.sm }}
       >
-        Fill Test Data
+        ¿No tienes cuenta? Regístrate
       </Button>
 
       <Text
@@ -94,7 +97,7 @@ const LoginForm: React.FC = () => {
         }}
         color={theme.colors.text.secondary}
       >
-        Use: test@example.com / password
+        Ingresa tus credenciales para continuar
       </Text>
     </View>
   );

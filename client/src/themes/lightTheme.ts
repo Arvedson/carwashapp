@@ -4,6 +4,7 @@ import { typography } from "./typography";
 import { spacing } from "./spacing";
 import { shadows } from "./shadows";
 import { borders } from "./borders";
+import { opacity } from "./opacity";
 import { componentTokens } from "./components";
 
 export const lightTheme: Theme = {
@@ -12,6 +13,7 @@ export const lightTheme: Theme = {
   spacing,
   shadows,
   borders,
+  opacity,
   components: componentTokens,
   isDark: false,
 };

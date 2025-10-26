@@ -121,7 +121,7 @@ CMD ["npm", "run", "dev"]
 ## Ventajas de este setup
 
 ✅ **Entorno Linux**: Simula exactamente el servidor de producción
-✅ **Aislamiento**: No contamina tu sistema
+✅ **Aislamiento**: No contamina el sistema
 ✅ **Portabilidad**: Mismo código funciona en cualquier lugar
 ✅ **Consistencia**: Mismo entorno en desarrollo
 ✅ **TypeScript**: Compilación automática en el contenedor

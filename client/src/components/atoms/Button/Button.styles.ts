@@ -12,6 +12,8 @@ export const createButtonStyles = (
 
   return StyleSheet.create({
     button: {
+      flex: 1, // Ocupa toda la altura y ancho disponible del contenedor
+      width: "100%", // Asegura que ocupe todo el ancho disponible
       borderRadius: borders.radius.md,
       alignItems: "center",
       justifyContent: "center",
@@ -23,8 +25,8 @@ export const createButtonStyles = (
         minHeight: theme.components.button.sizes.small.minHeight,
       }),
       ...(size === "medium" && {
-        paddingHorizontal: spacing.lg,
-        paddingVertical: spacing.md,
+        paddingHorizontal: spacing.md,
+        paddingVertical: spacing.sm,
         minHeight: theme.components.button.sizes.medium.minHeight,
       }),
       ...(size === "large" && {

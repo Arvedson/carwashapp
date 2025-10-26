@@ -126,3 +126,8 @@ La app solicita automáticamente los siguientes permisos:
 
 
 
+
+
+
+
+
